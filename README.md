@@ -41,9 +41,17 @@ for example
 ./push.swap 4 2 1 6 5 | ./checker 4 2 1 6 5
 ```
 
-You can simplify using bash variables.
+You can simplify using **bash** variables.
 ```
 ARGS="1 2 3"; ./push.swap $ARGS | ./checker $ARGS
+```
+Check the shell in use
+```
+echo $SHELL
+```
+If you're using zsh, switch to bash
+```
+bash
 ```
 
 ## Bonus tip
