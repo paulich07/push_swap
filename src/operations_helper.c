@@ -6,17 +6,18 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 18:38:37 by plichota          #+#    #+#             */
-/*   Updated: 2025/04/03 01:37:23 by plichota         ###   ########.fr       */
+/*   Updated: 2025/04/04 02:35:10 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    rotate_stack(t_list **stack, int rotations, char *s)
+void	rotate_stack(t_list **stack, int rotations, char *s)
 {
 	int	i;
+
 	if (!stack || !*stack || !rotations)
-		return;
+		return ;
 	i = 0;
 	while (i < rotations)
 	{
@@ -25,11 +26,12 @@ void    rotate_stack(t_list **stack, int rotations, char *s)
 	}
 }
 
-void    reverse_rotate_stack(t_list **stack, int rotations, char *s)
+void	reverse_rotate_stack(t_list **stack, int rotations, char *s)
 {
 	int	i;
+
 	if (!stack || !*stack || !rotations)
-		return;
+		return ;
 	i = 0;
 	while (i < rotations)
 	{
@@ -38,12 +40,12 @@ void    reverse_rotate_stack(t_list **stack, int rotations, char *s)
 	}
 }
 
-void    double_rotate_stack(t_list **stack1, t_list **stack2, int rotations)
+void	double_rotate_stack(t_list **stack1, t_list **stack2, int rotations)
 {
 	int	i;
 
 	if (!stack1 || !*stack1 || !stack2 || !*stack2 || !rotations)
-		return;
+		return ;
 	i = 0;
 	while (i < rotations)
 	{
@@ -52,12 +54,13 @@ void    double_rotate_stack(t_list **stack1, t_list **stack2, int rotations)
 	}
 }
 
-void    double_reverse_rotate_stack(t_list **stack1, t_list **stack2, int rotations)
+void	double_reverse_rotate_stack( t_list **stack1,
+	t_list **stack2, int rotations)
 {
 	int	i;
 
 	if (!stack1 || !*stack1 || !stack2 || !*stack2 || !rotations)
-		return;
+		return ;
 	i = 0;
 	while (i < rotations)
 	{

@@ -6,17 +6,17 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:43:38 by plichota          #+#    #+#             */
-/*   Updated: 2025/04/03 05:25:47 by plichota         ###   ########.fr       */
+/*   Updated: 2025/04/04 02:24:58 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		find_start_position(t_list *head)
+int	find_start_position(t_list *head)
 {
 	int	i;
-	int min;
-	int min_i;
+	int	min;
+	int	min_i;
 
 	if (!head || !head->next)
 		return (0);
@@ -36,7 +36,7 @@ int		find_start_position(t_list *head)
 	return (min_i);
 }
 
-int		is_max_or_min(t_list *elem, t_list *stack)
+int	is_max_or_min(t_list *elem, t_list *stack)
 {
 	int	bigger_exist;
 	int	smaller_exist;
@@ -58,10 +58,10 @@ int		is_max_or_min(t_list *elem, t_list *stack)
 	return (smaller_exist ^ bigger_exist);
 }
 
-int		find_insertion_index(t_list *stack_a, t_list *stack_b)
+int	find_insertion_index(t_list *stack_a, t_list *stack_b)
 {
-	int i;
-	t_list *prev;
+	t_list	*prev;
+	int		i;
 
 	if (is_max_or_min(stack_b, stack_a))
 		return (find_start_position(stack_a));
@@ -74,7 +74,8 @@ int		find_insertion_index(t_list *stack_a, t_list *stack_b)
 	stack_a = stack_a->next;
 	while (stack_a != NULL)
 	{
-		if (stack_a->content > stack_b->content && stack_a->content > prev->content
+		if (stack_a->content > stack_b->content
+			&& stack_a->content > prev->content
 			&& prev->content < stack_b->content)
 			return (i);
 		prev = stack_a;

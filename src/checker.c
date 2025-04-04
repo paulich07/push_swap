@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 02:56:07 by plichota          #+#    #+#             */
-/*   Updated: 2025/04/03 03:23:05 by plichota         ###   ########.fr       */
+/*   Updated: 2025/04/04 02:48:41 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 
 int	parse_move(char *move, t_list **stack_a, t_list **stack_b)
 {
-	if (!move || !stack_a || !stack_b) return (0);
 	if (ft_strncmp(move, "ra\n", 3) == 0)
 		rotate(stack_a, "a", 1);
 	else if (ft_strncmp(move, "rb\n", 3) == 0)
@@ -54,33 +53,40 @@ int	parse_move(char *move, t_list **stack_a, t_list **stack_b)
 	return (1);
 }
 
-int main(int argc, char *argv[])
+int	read_moves(t_list **stack_a, t_list **stack_b)
 {
-	t_list *stack_a;
-	t_list *stack_b;
-	char *line;
+	char	*line;
 
-	stack_a = NULL;
-	stack_b = NULL;
-	if (argc < 2)
-		return (0);
-	stack_a = create_stack(argc, argv);
-	if (!stack_a)
-		return (0);
 	line = get_next_line(0);
 	while (line)
 	{
-		if (!parse_move(line, &stack_a, &stack_b))
+		if (!parse_move(line, stack_a, stack_b))
 		{
 			free(line);
-			return (handle_error(&stack_a, &stack_b), 0);
+			return (0);
 		}
 		free(line);
 		line = get_next_line(0);
 	}
 	free(line);
+	return (1);
+}
+
+int	main(int argc, char *argv[])
+{
+	t_list	*stack_a;
+	t_list	*stack_b;
+
+	if (argc < 2)
+		return (0);
+	stack_a = create_stack(argc, argv);
+	if (!stack_a)
+		return (0);
+	stack_b = NULL;
+	if (!read_moves(&stack_a, &stack_b))
+		return (handle_error(&stack_a, &stack_b), 0);
 	if (stack_b != NULL)
-		return(handle_error(&stack_a, &stack_b), 0);
+		return (handle_error(&stack_a, &stack_b), 0);
 	if (is_sorted(stack_a))
 		write(1, "OK\n", 3);
 	else

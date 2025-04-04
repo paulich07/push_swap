@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:21:37 by plichota          #+#    #+#             */
-/*   Updated: 2025/04/03 05:32:33 by plichota         ###   ########.fr       */
+/*   Updated: 2025/04/04 02:26:06 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 void	set_best_moves(t_moves **best, t_moves **current)
 {
 	if (!current || !(*current))
-		return;
+		return ;
 	if (!(*best))
 	{
 		*best = *current;
 		*current = NULL;
-		return;
+		return ;
 	}
 	if ((*current)->total_moves < (*best)->total_moves)
 	{
@@ -37,13 +37,14 @@ void	set_best_moves(t_moves **best, t_moves **current)
 
 t_moves	*calculate_best_moves(t_list *stack_a, t_list *stack_b)
 {
-	t_moves *best;
-	t_moves *current;
-	int i;
+	t_moves	*best;
+	t_moves	*current;
+	int		i;
 
 	current = NULL;
 	best = NULL;
-	if (!stack_a || !stack_b) return (NULL);
+	if (!stack_a || !stack_b)
+		return (NULL);
 	i = 0;
 	while (i < ft_lstsize(stack_b))
 	{
@@ -60,15 +61,15 @@ t_moves	*calculate_best_moves(t_list *stack_a, t_list *stack_b)
 
 void	insert_sorted_stack(t_list **stack_a, t_list **stack_b)
 {
-	t_moves *best_moves;
+	t_moves	*best_moves;
 
 	if (!stack_a || !*stack_a || !stack_b || !*stack_b)
-	    return;
+		return ;
 	while (*stack_b != NULL)
 	{
 		best_moves = calculate_best_moves(*stack_a, *stack_b);
 		if (!best_moves)
-			return;
+			return ;
 		while (--best_moves->rr >= 0)
 			double_rotate(stack_a, stack_b, 0);
 		while (--best_moves->rrr >= 0)
@@ -91,7 +92,7 @@ void	rotate_stack_to_start(t_list **stack)
 	int	rotations;
 
 	if (!stack || !*stack || !(*stack)->next)
-		return;
+		return ;
 	rotations = find_start_position(*stack);
 	if (rotations > ft_lstsize(*stack) / 2)
 		reverse_rotate_stack(stack, ft_lstsize(*stack) - rotations, "a");

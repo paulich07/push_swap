@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 04:41:09 by plichota          #+#    #+#             */
-/*   Updated: 2025/04/03 06:12:33 by plichota         ###   ########.fr       */
+/*   Updated: 2025/04/04 02:39:59 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,28 @@
 
 int	is_int(char *s)
 {
-	int			i;
-	int			sign;
-	long int	num;
+	t_iter	iter;
 
-	i = 0;
-	sign = 1;
-	num = 0;
+	ft_memset(&iter, 0, sizeof(iter));
 	if (!s)
 		return (0);
-	while (s[i] == ' ')
-		i++;
-	if (s[i] == '-' || s[i] == '+')
+	while (s[iter.i] == ' ')
+		iter.i++;
+	if (s[iter.i] == '-' || s[iter.i] == '+')
 	{
-		if (s[i] == '-')
-			sign = -1;
-		i++;
+		if (s[iter.i] == '-')
+			iter.sign = -1;
+		iter.i++;
 	}
-	while (s[i] != '\0')
+	while (s[iter.i] != '\0')
 	{
-		if (s[i] < '0' || s[i] > '9')
+		if (s[iter.i] < '0' || s[iter.i] > '9')
 			return (0);
-		num = num * 10 + (s[i] - '0');
-		i++;
+		iter.num = iter.num * 10 + (s[iter.i] - '0');
+		iter.i++;
 	}
-	if ((num < INT_MIN && sign == -1) || (num > INT_MAX && sign == 1))
+	if ((iter.num < INT_MIN && iter.sign == -1)
+		|| (iter.num > INT_MAX && iter.sign == 1))
 		return (0);
 	return (1);
 }
@@ -74,6 +71,8 @@ int	is_unique(t_list *stack, int n)
 // fd = 2 scrive forzatamente sul terminale
 //	ANCHE SE è stato rediretto (posso forzare anche questo con 2>)
 // Lo usiamo perchè consente di gestire output e errori separatamente
+
+// libera gli stack e stampa errore su standard output (STDERR)
 void	handle_error(t_list **stack_1, t_list **stack_2)
 {
 	if (stack_1)
